@@ -47,8 +47,15 @@ def main_loop():
 
             if choice == 'g':
                 # --- Step 4: Execution ---
-                # Call the correct worker function from our dictionary
-                worker_agents[output_type](current_prompt)
+                print("\n⏳ Generating output, please wait...")
+                
+                # Call the correct worker function and store its RETURN value
+                result = worker_agents[output_type](current_prompt)
+                
+                # Print the final result (either the story or the filename)
+                print(result)
+                
+                print("-" * 20)
                 break # Break inner loop to start a new project
                 
             elif choice == 'r':
