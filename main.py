@@ -56,9 +56,16 @@ def main_loop():
                 current_prompt = refine_prompt(current_prompt, output_type)
                 
             elif choice == 'e':
-                # Let the user manually edit
-                print("Editing prompt. Press Enter when done.")
-                current_prompt = input(f"Edit [{current_prompt}]: ") or current_prompt
+                # Get the user's edit instruction
+                print("\nWhat change would you like to make?")
+                edit_instruction = input("Edit Suggestion: ")
+
+                # Call the refiner agent, passing the *current prompt* and the *new edit*
+                current_prompt = refine_prompt(
+                    original_prompt=current_prompt, 
+                    output_type=output_type, 
+                    edit_instruction=edit_instruction
+                )
                 
             elif choice == 's':
                 break # Break inner loop to start a new project
