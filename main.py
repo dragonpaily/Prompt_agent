@@ -16,7 +16,7 @@ def main_loop():
     worker_agents = {
         'text': generate_text,
         'image': generate_image,
-        #'video': generate_video
+        'video': generate_video
     }
 
     while True:
@@ -26,7 +26,7 @@ def main_loop():
             break
 
         while True:
-            output_type = input("What do you want to generate? (text/image): ").lower()
+            output_type = input("What do you want to generate? (text/image/video): ").lower()
             if output_type in worker_agents:
                 break
             elif output_type == 'quit':
@@ -45,16 +45,29 @@ def main_loop():
                 "\nChoose an action: [G]enerate, [R]efine again, [E]dit, [S]tart over: "
             ).lower()
 
+            # (NEW CODE)
             if choice == 'g':
-                # --- Step 4: Execution ---
+            # --- Step 4: Execution ---
+
+                # --- NEW LOGIC FOR VIDEO ---
+                if output_type == 'video':
+                    print("\n✅ Video Prompt Generation Complete!")
+                    print("Here is your finalized prompt, ready for a video model:")
+                    print("-" * 20)
+                    print(current_prompt)
+                    print("-" * 20)
+                    break # Break inner loop to start a new project
+                     # --- END NEW LOGIC ---
+
+                    # This part will now only run for 'text' and 'image'
                 print("\n⏳ Generating output, please wait...")
-                
+
                 # Call the correct worker function and store its RETURN value
                 result = worker_agents[output_type](current_prompt)
-                
+
                 # Print the final result (either the story or the filename)
                 print(result)
-                
+
                 print("-" * 20)
                 break # Break inner loop to start a new project
                 
