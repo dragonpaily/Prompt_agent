@@ -16,7 +16,7 @@ def main_loop():
     worker_agents = {
         'text': generate_text,
         'image': generate_image,
-        'video': generate_video
+        #'video': generate_video
     }
 
     while True:
@@ -26,7 +26,7 @@ def main_loop():
             break
 
         while True:
-            output_type = input("What do you want to generate? (text/image/video): ").lower()
+            output_type = input("What do you want to generate? (text/image): ").lower()
             if output_type in worker_agents:
                 break
             elif output_type == 'quit':
